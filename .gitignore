@@ -2,3 +2,7 @@ target
 .DS_Store
 qkafka
 .vscode
+.settings
+.classpath
+.project
+
