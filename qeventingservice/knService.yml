@@ -1,0 +1,24 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: qeventingservice
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: dev.local/burrsutter/qeventingservice:1.0.0
+            resources:
+              requests: 
+                memory: "30Mi" 
+                cpu: "75m" 
+              limits:
+                memory: "30Mi"
+                cpu: "75m" 
+            livenessProbe:
+              httpGet:
+                path: /healthz
+            readinessProbe:
+              httpGet:
+                path: /healthz

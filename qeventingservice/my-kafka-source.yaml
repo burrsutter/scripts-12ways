@@ -1,0 +1,14 @@
+apiVersion: sources.eventing.knative.dev/v1alpha1
+kind: ContainerSource
+metadata:
+  name: my-kafka-source
+spec:
+  image: quay.io/redhatdemo/kafka-src
+  args: 
+    - '--bootstrap=my-cluster-kafka-bootstrap.franz.svc.cluster.local:9092'
+    - '--topic=my-topic'
+    - '--groupId=my-group-id'
+  sink:
+    apiVersion: serving.knative.dev/v1alpha1
+    kind: Service
+    name: qeventingservice
