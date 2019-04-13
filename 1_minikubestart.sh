@@ -2,7 +2,9 @@
 
 minikube start -p 12ways --memory=8192 --cpus=3 \
   --kubernetes-version=v1.12.0 \
-  --vm-driver=virtualbox \
-  --disk-size=30g \
+  --vm-driver=hyperkit \
+  --disk-size=30g 
 
-  echo 'eval $(minikube -p 12ways docker-env)'
+minikube -p 12ways addons enable ingress
+
+echo 'eval $(minikube -p 12ways docker-env)'
