@@ -12,14 +12,10 @@ import javax.websocket.server.ServerEndpoint;
 import org.jboss.logging.Logger;
 
 import io.smallrye.reactive.messaging.annotations.Stream;
-import io.reactivex.Flowable;
-import org.eclipse.microprofile.health.Health;
-import org.eclipse.microprofile.reactive.streams.operators.PublisherBuilder;
+import io.smallrye.reactive.messaging.annotations.Emitter;
 
-// import io.smallrye.reactive.messaging.
 
-@ServerEndpoint("/")
-@Health
+@ServerEndpoint("/shake")
 @ApplicationScoped
 public class WebSocket {
 
@@ -27,7 +23,9 @@ public class WebSocket {
     private int counter;
 
     // mystream configured in application.properties    
-    @Inject @Stream("mystream") PublisherBuilder<String> stream;
+    
+    @Inject @Stream("mystream")
+    Emitter<String> emitter;
 
     @OnOpen
     public void onOpen(Session session) {
@@ -46,8 +44,8 @@ public class WebSocket {
 
     @OnMessage
     public void onMessage(String message) {
-        LOG.info(counter++ + " " + message);
-        
+        String kafkaMsg = counter++ + " " + message;
+        LOG.info(kafkaMsg);
+        emitter.send(kafkaMsg);
     }
-
 }
