@@ -9,11 +9,9 @@ import javax.websocket.*;
 // import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import org.jboss.logging.Logger;
-import org.eclipse.microprofile.health.Health;
+// import org.eclipse.microprofile.health.Health;
 
-@ServerEndpoint("/")
-
-@Health
+@ServerEndpoint("/shake")
 @ApplicationScoped
 public class WebSocket {
 
