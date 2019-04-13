@@ -15,12 +15,13 @@ import java.util.concurrent.TimeUnit;
 public class MyStreamPublisher {
     private static final Logger LOG = Logger.getLogger(MyStreamPublisher.class);
 
-    private Random random = new Random();
+    // private Random random = new Random();
+    int cnt = 0;
 
     @Outgoing("mystream")
     public Flowable<String> generate() {
         return Flowable.interval(1, TimeUnit.SECONDS)
-                .map(msg -> random.nextInt(100) + " stuff ");
+                .map(msg -> cnt++ + " stuff ");
     }
     
 }

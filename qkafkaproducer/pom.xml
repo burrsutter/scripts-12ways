@@ -29,12 +29,14 @@
   </dependencyManagement>
 
   <dependencies>
-
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-undertow</artifactId>
+    </dependency>
     <dependency>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-smallrye-reactive-messaging</artifactId>
     </dependency>
-    
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-streams-operators</artifactId>
@@ -43,11 +45,12 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
     </dependency>
-
+<!-- 
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-vertx</artifactId>
     </dependency>
+-->
 
   </dependencies>
   <build>
