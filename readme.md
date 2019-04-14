@@ -17,7 +17,9 @@ kafkacat -C -b localhost -t my-topic
 
 
 
-2. For Kafka in Kubernetes
+2. For Kafka in Kubernetes 
+Strimzi-based Kafka brokers are sometimes accesible IF using xhyve
+
 ./10_kafka_strimiz.sh
 ./12_create_cluster.sh
 ./13_create_topic.sh

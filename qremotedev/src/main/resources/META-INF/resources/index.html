@@ -1,0 +1,57 @@
+<html>
+  <head>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">  
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- stop the favicon 404 in browser devtools -->
+      <link rel="shortcut icon" href="">
+  </head>
+  <body>
+
+    <font size="100" color=red>Websocket & Timer</font>
+    <hr/>
+    <font size="100">
+    <a href="/api">Hello</a>
+    <br>
+    <a href="/api/Burr">Hello Burr</a>
+    </font>
+    <hr/>
+    <font size="100">
+    <div id="messagesFromServer"></div>
+    </font>
+    
+
+    <script language="javascript">
+      var connected = false;
+      var socket;
+
+      $( document ).ready(function() {
+        wsconnect();
+        setInterval(function(){ 
+            console.log("tick");
+            socket.send("tick");
+        }, 2000);
+      });
+
+      // Handle Websocket Connection
+      var wsconnect = function() {
+        if (! connected) {
+          console.log(location.host);
+          socket = new WebSocket("ws://" + location.host + "/wsendpoint");
+          socket.onopen = function() {
+            connected = true;
+            console.log("Connected to the web socket");
+          };
+          socket.onmessage = function(message) {
+            var element = document.getElementById("messagesFromServer");
+            // element.appendChild(message + "<br>");
+            element.insertAdjacentHTML('beforeend', '<div id="two">' + message.data + '</div>');
+          }; // socket.onmessage          
+
+        }
+      }
+
+
+    </script>
+  </body>
+</html>
