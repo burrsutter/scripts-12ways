@@ -1,3 +1,3 @@
 #!/bin/bash
 
-kubectl apply -f kubefiles/my-topic.yaml
+kubectl apply -f kafka-kubernetes/my-topic.yaml
