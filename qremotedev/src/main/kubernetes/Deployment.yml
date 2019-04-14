@@ -1,0 +1,41 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: qremotedev
+  name: qremotedev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qremotedev
+  template:
+    metadata:
+      labels:
+        app: qremotedev
+    spec:
+      containers:
+      - name: qremotedev
+        image: burrsutter/qremotedev:1.0.0
+        ports:
+          - containerPort: 8080
+        resources:
+          requests: 
+            memory: "500Mi" 
+            cpu: "250m" 
+          limits:
+            memory: "500Mi"
+            cpu: "250m" 
+#        livenessProbe:
+#          httpGet:
+#              port: 8080
+#              path: /api
+#          initialDelaySeconds: 90
+#          periodSeconds: 60
+#          timeoutSeconds: 50          
+#        readinessProbe:
+#          httpGet:
+#            path: /api
+#            port: 8080
+#          initialDelaySeconds: 120
+#          periodSeconds: 3

@@ -2,7 +2,7 @@ FROM centos:7
 ARG MAVEN_VERSION=3.6.0
 
 ARG MAVEN_URL=https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
-ARG INSTALL_PKGS="buildah findutils podman bzip2-devel gcc-c++ libcurl-devel openssl-devel tar unzip bc which lsof gzip java-1.8.0-openjdk-devel"
+ARG INSTALL_PKGS="git buildah findutils podman bzip2-devel gcc-c++ libcurl-devel openssl-devel tar unzip bc which lsof gzip java-1.8.0-openjdk-devel"
 
 ENV MAVEN_HOME /usr/share/maven
 ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
@@ -25,7 +25,9 @@ RUN  yum update -y && \
      ###
 
 # COPY resources/settings.xml ${MAVEN_HOME}/ref
-ADD kubernetes/*.sh /usr/local/bin/
+ADD src/main/kubernetes/*.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/entrypoint-run.sh
 
 VOLUME /project 
 WORKDIR /project
